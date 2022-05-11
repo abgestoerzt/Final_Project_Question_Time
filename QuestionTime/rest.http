@@ -1,0 +1,46 @@
+@host= http://127.0.0.1:8000
+@username=new_user
+@email=new@user.com
+@password= newuserpassword
+@token=9860af8bae7c30a69c60015483d65de208744f32
+
+
+### Create new account
+
+POST  {{host}}/auth/users/
+Content-Type: application/json
+
+{
+    "username": "{{username}}",
+    "email": "{{email}}",
+    "password": "{{password}}",
+    "re_password": "{{password}}"
+}
+
+
+### Login
+POST {{host}}/auth/token/login/
+Content-Type: application/json
+
+{
+    "username": "{{username}}",
+    "password": "{{password}}"
+}
+
+### Logout
+POST {{host}}/auth/token/logout/
+Authorization: token {{token}}
+
+### PostNewQuestion
+POST {{host}}/api/v1/questions/
+Content-Type: application/json
+Authorization: token {{token}}
+
+{
+    "content": "Third Question by new user"
+}
+
+###GetAllQuestions
+
+GET {{host}}/api/v1/questions/
+Authorization: token {{token}}
